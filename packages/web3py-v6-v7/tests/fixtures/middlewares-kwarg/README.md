@@ -1,0 +1,1 @@
+Canonical JSSG fixtures live in `tests/middlewares-kwarg/` (`input.py` / `expected.py`). This folder is kept as a duplicate for readers following older docs; prefer the `tests/middlewares-kwarg/` layout for `npx codemod jssg test`.

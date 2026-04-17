@@ -1,0 +1,27 @@
+schema_version: "1.0"
+
+name: "web3py-v6-v7"
+version: "0.5.1"
+description: "Deterministic web3.py v6 to v7 migration workflow (JSSG + optional AI)"
+author: "Boring_AI"
+license: "MIT"
+workflow: "workflow.yaml"
+
+
+targets:
+  languages: ["python"]
+
+keywords:
+  - "web3"
+  - "web3.py"
+  - "ethereum"
+  - "python"
+  - "migration"
+  - "v6"
+  - "v7"
+
+registry:
+  access: "public"
+  visibility: "public"
+
+capabilities: []

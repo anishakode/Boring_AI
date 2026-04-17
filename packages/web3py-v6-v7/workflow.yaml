@@ -1,0 +1,56 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/codemod/codemod/refs/heads/main/schemas/workflow.json
+#
+# Deterministic JSSG first; optional AI for edge cases (hackathon rubric).
+
+version: "1"
+
+params:
+  schema:
+    run_ai_step:
+      name: "Run AI migration fixups"
+      description: "Set to true when LLM_API_KEY is available (see Codemod AI step docs)"
+      type: string
+      default: "false"
+
+nodes:
+  - id: apply-yaml
+    name: Apply YAML ast-grep rules (optional / experimental)
+    type: automatic
+    steps:
+      - name: "Scan Python files with YAML rules"
+        ast-grep:
+          config_file: "rules/config.yml"
+          include:
+            - "**/*.py"
+            - "**/*.pyi"
+
+  - id: jssg-apply
+    name: Apply JSSG transforms
+    type: automatic
+    depends_on: [apply-yaml]
+    steps:
+      - name: "Python transforms (web3.py v6→v7)"
+        js-ast-grep:
+          js_file: scripts/codemod.ts
+          language: "python"
+          include:
+            - "**/*.py"
+            - "**/*.pyi"
+
+  - id: ai-fixups
+    name: Optional AI edge cases
+    type: automatic
+    depends_on: [jssg-apply]
+    steps:
+      - name: "AI-assisted cleanup (web3.py v6→v7)"
+        if: params.run_ai_step == "true"
+        ai:
+          prompt: |
+            Deterministic codemod steps already ran on this Python codebase for web3.py v6→v7.
+
+            Using https://web3py.readthedocs.io/en/stable/migration.html as the source of truth:
+            - Fix remaining v6-only APIs and patterns you can verify from the guide.
+            - Do not introduce false positives: skip ambiguous cases and leave a short TODO comment with reason.
+            - Do not reformat unrelated files or change non-web3 code unless clearly required for the migration.
+
+            Prefer minimal, reviewable edits.

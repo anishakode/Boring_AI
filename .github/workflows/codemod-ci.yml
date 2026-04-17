@@ -1,0 +1,38 @@
+# Validates the web3py-v6-v7 Codemod package on every push / PR.
+
+name: Codemod package CI
+
+on:
+  push:
+    paths:
+      - "packages/web3py-v6-v7/**"
+      - ".github/workflows/codemod-ci.yml"
+  pull_request:
+    paths:
+      - "packages/web3py-v6-v7/**"
+      - ".github/workflows/codemod-ci.yml"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packages/web3py-v6-v7
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: packages/web3py-v6-v7/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci || npm install
+
+      - name: Fixture tests
+        run: npm test
+
+      - name: Validate workflow YAML
+        run: npx codemod workflow validate -w workflow.yaml

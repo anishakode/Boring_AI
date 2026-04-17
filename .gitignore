@@ -1,0 +1,10 @@
+**/node_modules/
+.env
+.env.local
+
+# IDE / local agent config (not part of hackathon artifact)
+.cursor/
+
+# Local full-repo clones (reclone per Test/README.md); keep Test/README.md
+Test/real-web3py-v6.20.4/
+Test/real-brownie-v1.20.0/

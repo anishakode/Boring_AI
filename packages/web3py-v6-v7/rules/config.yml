@@ -1,0 +1,7 @@
+# ast-grep rule — web3.py v7 renames provider kwarg `middlewares` -> `middleware`
+
+id: middlewares-kwarg-to-middleware
+language: Python
+rule:
+  pattern: middlewares=$A
+fix: middleware=$A

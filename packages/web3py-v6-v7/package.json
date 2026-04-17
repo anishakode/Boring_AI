@@ -1,0 +1,16 @@
+{
+  "name": "web3py-v6-v7",
+  "version": "0.5.1",
+  "description": "Deterministic web3.py v6 to v7 migration helpers",
+  "main": "scripts/codemod.ts",
+  "scripts": {
+    "validate": "npx codemod workflow validate -w workflow.yaml",
+    "test": "npx codemod jssg test -l python ./scripts/codemod.ts ./tests --strictness strict"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@codemod.com/jssg-types": "^1.5.0",
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0"
+  }
+}
