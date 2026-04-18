@@ -36,13 +36,6 @@ npx codemod workflow run -w workflow.yaml -t /path/to/project --allow-dirty --no
 
 The migration guide is **large**. This package implements **test-backed deterministic rules** first (accuracy over claiming 100% coverage). See the package README and submission doc for the exact pattern list.
 
-## Showcase site
-
-Static landing page for judges and the BUIDL “project website” field: [`website/`](website/). Workflow: [`.github/workflows/showcase-pages.yml`](.github/workflows/showcase-pages.yml).
-
-**One-time:** In the repo on GitHub go to **Settings → Pages → Build and deployment**, set **Source** to **GitHub Actions** (not “Deploy from a branch”). If you skip this, the workflow fails at `configure-pages` with *Get Pages site failed* / 404. Then **Re-run** the workflow from the **Actions** tab.
-
-Live URL (after a green deploy): `https://anishakode.github.io/Boring_AI/` — see [Pages docs](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site).
 
 ## License
 
