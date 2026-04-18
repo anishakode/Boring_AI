@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>web3.py v6 → v7 — Codemod showcase</title>
+    <meta
+      name="description"
+      content="Deterministic Codemod.com workflow for web3.py v6 to v7 migrations — tested transforms, CI, real-repo evaluation."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <div class="wrap inner">
+        <a class="brand" href="#">web3.py <span>v6→v7</span></a>
+        <nav>
+          <a href="#about">About</a>
+          <a href="#patterns">Patterns</a>
+          <a href="#evidence">Evidence</a>
+          <a href="#try">Try it</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <div class="wrap hero">
+        <p class="badge">Boring AI hackathon · Codemod</p>
+        <h1>Upgrade web3.py with reviewable, tested edits</h1>
+        <p class="lead">
+          A <strong>Codemod.com workflow</strong> plus <strong>JSSG transforms</strong> that automate the repetitive parts of
+          <a href="https://web3py.readthedocs.io/en/stable/migration.html">v6 → v7</a>
+          migrations — accuracy first, with fixture tests and real open-source corpus runs.
+        </p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="https://github.com/anishakode/Boring_AI" target="_blank" rel="noopener"
+            >View on GitHub</a
+          >
+          <a class="btn btn-ghost" href="https://dorahacks.io/hackathon/boring-ai/buidl" target="_blank" rel="noopener"
+            >Hackathon (DoraHacks)</a
+          >
+        </div>
+      </div>
+
+      <section id="about">
+        <div class="wrap">
+          <h2>Problem &amp; approach</h2>
+          <div class="grid-2">
+            <div class="card">
+              <h3>The problem</h3>
+              <p>
+                Large Python codebases accumulate v6 patterns: middleware kwargs, provider names, filter kwargs, and
+                sign-and-send middleware. Manual upgrades are slow and error-prone.
+              </p>
+            </div>
+            <div class="card">
+              <h3>Our approach</h3>
+              <p>
+                Deterministic rules with <strong>9 JSSG fixtures</strong>, optional AI follow-up in the workflow, and
+                documented limits (e.g. conservative handling of POA factory-style code).
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="patterns">
+        <div class="wrap">
+          <h2>What the codemod handles</h2>
+          <div class="card">
+            <ul class="patterns">
+              <li><code>middlewares=</code> → <code>middleware=</code></li>
+              <li><code>WebsocketProviderV2</code> → <code>WebSocketProvider</code></li>
+              <li>RPC-style kwargs (<code>fromBlock</code>, <code>toBlock</code>, <code>blockHash</code>) → snake_case, with guards for bare <code>dict(...)</code></li>
+              <li>Selected middleware-onion bare identifiers → class instances + import cleanup</li>
+              <li><code>construct_sign_and_send_raw_middleware</code> → <code>SignAndSendRawMiddlewareBuilder.build(...)</code> where applicable</li>
+            </ul>
+            <p style="margin: 1rem 0 0; font-size: 0.92rem; color: var(--muted)">
+              Full detail: <a href="https://github.com/anishakode/Boring_AI/blob/master/docs/HACKATHON_SUBMISSION.md">HACKATHON_SUBMISSION.md</a>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="evidence">
+        <div class="wrap">
+          <h2>Evidence</h2>
+          <div class="grid-2">
+            <div class="card">
+              <h3>Automation</h3>
+              <p>Fixture tests and <code>workflow validate</code> run in GitHub Actions on every change to the package.</p>
+              <div class="stats">
+                <div class="stat"><strong>9</strong><span>JSSG tests</span></div>
+                <div class="stat"><strong>CI</strong><span>GitHub Actions</span></div>
+              </div>
+            </div>
+            <div class="card">
+              <h3>Real repos</h3>
+              <p>
+                Documented runs on <strong>ethereum/web3.py @ v6.20.4</strong> and <strong>eth-brownie/brownie @ v1.20.0</strong> — see the comparison and evaluation reports in the repo.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="try">
+        <div class="wrap">
+          <h2>Try it locally</h2>
+          <div class="card">
+            <p style="margin: 0 0 0.5rem; color: var(--muted)">From the repository root:</p>
+            <pre class="code">cd packages/web3py-v6-v7
+npm install
+npm test
+npx codemod workflow validate -w workflow.yaml</pre>
+            <p style="margin: 1rem 0 0.35rem; color: var(--muted)">Apply to a project (use a branch first):</p>
+            <pre class="code">npx codemod workflow run -w workflow.yaml -t /path/to/repo \
+  --allow-dirty --no-interactive --allow-fs</pre>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="wrap">
+        <p>
+          MIT ·
+          <a href="https://github.com/anishakode/Boring_AI">anishakode/Boring_AI</a>
+          · Official migration guide:
+          <a href="https://web3py.readthedocs.io/en/stable/migration.html">web3.py v6 → v7</a>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

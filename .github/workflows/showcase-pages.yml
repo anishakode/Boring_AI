@@ -1,0 +1,36 @@
+# Publishes website/ to GitHub Pages when you enable:
+# Settings → Pages → Build and deployment → Source: GitHub Actions
+
+name: Showcase site (GitHub Pages)
+
+on:
+  push:
+    branches: [master, main]
+    paths:
+      - "website/**"
+      - ".github/workflows/showcase-pages.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages-showcase
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v4
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: website
+      - id: deployment
+        uses: actions/deploy-pages@v4
