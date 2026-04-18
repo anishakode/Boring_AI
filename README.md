@@ -36,7 +36,6 @@ npx codemod workflow run -w workflow.yaml -t /path/to/project --allow-dirty --no
 
 The migration guide is **large**. This package implements **test-backed deterministic rules** first (accuracy over claiming 100% coverage). See the package README and submission doc for the exact pattern list.
 
-**Before submit:** walk [`docs/HACKATHON_RUBRIC_CHECKLIST.md`](docs/HACKATHON_RUBRIC_CHECKLIST.md) and update [`docs/evaluation-report.md`](docs/evaluation-report.md).
 
 ## License
 
