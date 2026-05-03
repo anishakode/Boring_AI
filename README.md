@@ -2,7 +2,7 @@
 
 This repository is a **Spec Kit (Speckit)** workspace plus a **Codemod.com-style package** that automates **mechanical** parts of [web3.py v6 → v7](https://web3py.readthedocs.io/en/stable/migration.html).
 
-## Deliverable (what judges run)
+## Deliverable
 
 | Path | Purpose |
 |------|---------|
